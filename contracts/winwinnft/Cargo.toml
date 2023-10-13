@@ -1,0 +1,15 @@
+[package]
+name = "winwinnft"
+version = "0.0.1"
+authors = ["Marco Sun <sun.dsk1@gmail.com>"]
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+near-sdk = "=4.0.0"
+near-contract-standards = "=4.0.0"
+near-sys = "=0.2"
+
