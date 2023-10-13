@@ -64,14 +64,17 @@ impl Contract {
         }
     }
 
-    /// Mint a new token with ID=`token_id` belonging to `receiver_id`.
-    ///
-    /// Since this example implements metadata, it also requires per-token metadata to be provided
-    /// in this call. `self.tokens.mint` will also require it to be Some, since
-    /// `StorageKey::TokenMetadata` was provided at initialization.
-    ///
-    /// `self.tokens.mint` will enforce `predecessor_account_id` to equal the `owner_id` given in
-    /// initialization call to `new`.
+    #[payable]
+    pub fn set_owner(&mut self, owner_id: AccountId) {
+        require!(env::attached_deposit() == 1, "Requires attached deposit of exactly 1 yoctoNEAR");
+        self.assert_owner();
+        self.tokens.owner_id = owner_id;
+    }
+
+    pub fn get_owner(&self) -> String {
+        self.tokens.owner_id.to_string()
+    }
+
     #[payable]
     pub fn nft_mint(
         &mut self,
